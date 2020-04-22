@@ -6,7 +6,9 @@ import rpyc
 
 def main():
     c = rpyc.connect('localhost', 60001, config = {'sync_request_timeout':60})
-    print(c.root.test())
+    print('teststr should be 1234, now is:', c.root.test())
+    c.root.load_so('./deps/libadd.so')
+
     c.close()
 
 if __name__ == "__main__":
