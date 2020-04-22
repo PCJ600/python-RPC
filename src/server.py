@@ -24,8 +24,10 @@ class MyService(rpyc.Service):
     def exposed_test_add(self, so_path, a, b):
         return self.loaded_so[so_path].add(a, b)
 
-
-if __name__ == "__main__":
+def start_rpc_server():
     from rpyc.utils.server import ThreadedServer
     server = ThreadedServer(MyService, port=60001)
     server.start()
+
+if __name__ == "__main__":
+    start_rpc_server()
