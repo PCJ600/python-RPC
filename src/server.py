@@ -20,8 +20,11 @@ class MyService(rpyc.Service):
 
     def exposed_load_so(self, so_path):
         self.loaded_so[so_path] = ctypes.CDLL(so_path, mode=ctypes.DEFAULT_MODE)
-    
-    
+
+    def exposed_test_add(self, so_path, a, b):
+        return self.loaded_so[so_path].add(a, b)
+
+
 if __name__ == "__main__":
     from rpyc.utils.server import ThreadedServer
     server = ThreadedServer(MyService, port=60001)
